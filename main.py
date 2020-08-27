@@ -47,7 +47,7 @@ class DiscordMessageSender(commands.Bot):
 
     async def send_message(self):
         await self.wait_until_ready()
-        channel = self.get_channel(self.uat_channel_id)
+        channel = self.get_channel(self.hfwc_channel_id)
         while True:
             messages_list = self.database.get_messages_list()
             for item in messages_list:
