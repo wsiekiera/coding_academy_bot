@@ -33,6 +33,7 @@ class DiscordMessageSender(commands.Bot):
         self.database = MyDatabase()
         self.prd_channel_id = 732307601202741301
         self.uat_channel_id = 744152884933034017
+        self.hfwc_channel_id = 740594408952692898
 
     async def on_ready(self):
         print('Logged in as')
@@ -46,13 +47,13 @@ class DiscordMessageSender(commands.Bot):
 
     async def send_message(self):
         await self.wait_until_ready()
-        channel = self.get_channel(self.prd_channel_id)
+        channel = self.get_channel(self.uat_channel_id)
         while True:
             messages_list = self.database.get_messages_list()
             for item in messages_list:
                 if number_of_seconds_to_date(item['time']) <= 0 and not item['sent']:
                     self.database.mark_as_sent(item['id'])
-                    await channel.send(item['message'])
+                    await channel.send(item['message'], file=discord.File('Have Fun With CodING #2.ipynb'))
             await asyncio.sleep(1)
 
 #
